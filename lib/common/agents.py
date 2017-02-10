@@ -64,11 +64,14 @@ from pydispatch import dispatcher
 from zlib_wrapper import compress
 from zlib_wrapper import decompress
 
+
 # Empire imports
 import encryption
 import helpers
 import packets
 import messages
+
+import notifications
 
 
 class Agents:
@@ -1322,6 +1325,10 @@ class Agents:
 
             # signal everyone that this agent is now active
             dispatcher.send("[+] Initial agent %s from %s now active" % (sessionID, clientIP), sender='Agents')
+            try:
+                notifications.send_pushover(("Initial agent ") + sessionID + (" from ") + clientIP + (" now active"),"New Agent")
+            except:
+                print("something is wrong with pushover configuration")
             output = "[+] Agent %s now active:\n" % (sessionID)
 
             # save the initial sysinfo information in the agent log
@@ -1339,6 +1346,7 @@ class Agents:
 
         else:
             dispatcher.send("[!] Invalid staging request packet from %s at %s : %s" % (sessionID, clientIP, meta), sender='Agents')
+            send_pushover(("Invalid staging request packet from ") + sessionID + (" at ") + clientIP + (" : ") + meta,"Agent Failed")
 
 
     def handle_agent_data(self, stagingKey, routingPacket, listenerOptions, clientIP='0.0.0.0'):

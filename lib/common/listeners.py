@@ -13,6 +13,8 @@ import pickle
 import hashlib
 import copy
 
+import notifications
+
 
 class Listeners:
     """
@@ -197,6 +199,7 @@ class Listeners:
             success = listenerObject.start(name=name)
 
             if success:
+                notifications.send_pushover("%s listener has been started!" % (name), "Started Listener")
                 print helpers.color('[+] Listener successfully started!')
                 listenerOptions = copy.deepcopy(listenerObject.options)
                 self.activeListeners[name] = {'moduleName': moduleName, 'options':listenerOptions}
@@ -246,6 +249,7 @@ class Listeners:
                 success = listenerModule.start(name=listenerName)
 
                 if success:
+                    notifications.send_pushover("%s listener has been started!" % (listenerName), "Started Listener")
                     print helpers.color('[+] Listener successfully started!')
                     listenerOptions = copy.deepcopy(listenerModule.options)
                     self.activeListeners[listenerName] = {'moduleName': moduleName, 'options':listenerOptions}
