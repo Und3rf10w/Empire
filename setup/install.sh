@@ -26,6 +26,7 @@ if lsb_release -d | grep -q "Fedora"; then
 	pip install pyopenssl
 	pip install pyinstaller
 	pip install zlib_wrapper
+	pip install python-pushover
 elif lsb_release -d | grep -q "Kali"; then
 	Release=Kali
 	apt-get install -y make g++ python-pip python-dev python-m2crypto swig python-pip libxml2-dev default-jdk libssl-dev
@@ -39,6 +40,7 @@ elif lsb_release -d | grep -q "Kali"; then
 	pip install pyopenssl
 	pip install pyinstaller
 	pip install zlib_wrapper
+	pip install python-pushover
 elif lsb_release -d | grep -q "Ubuntu"; then
 	Release=Ubuntu
 	apt-get install -y make g++ python-pip python-dev python-m2crypto swig python-pip libxml2-dev default-jdk libssl-dev
@@ -53,6 +55,7 @@ elif lsb_release -d | grep -q "Ubuntu"; then
 	pip install pyopenssl
 	pip install pyinstaller
 	pip install zlib_wrapper
+	pip install python-pushover
 else
 	echo "Unknown distro - Debian/Ubuntu Fallback"
 	 apt-get install -y make g++ python-pip python-dev python-m2crypto swig python-pip libxml2-dev default-jdk libffi-dev libssl-dev
@@ -67,6 +70,7 @@ else
 	 pip install python-openssl
 	 pip install pyinstaller
 	 pip install zlib_wrapper
+	 pip install python-pushover
 fi
 tar -xvf ../data/misc/xar-1.5.2.tar.gz
 (cd xar-1.5.2 && ./configure)
