@@ -1325,10 +1325,7 @@ class Agents:
 
             # signal everyone that this agent is now active
             dispatcher.send("[+] Initial agent %s from %s now active" % (sessionID, clientIP), sender='Agents')
-            try:
-                notifications.send_pushover(("Initial agent ") + sessionID + (" from ") + clientIP + (" now active"),"New Agent")
-            except:
-                print("something is wrong with pushover configuration")
+            notifications.send_pushover(("Initial agent ") + sessionID + (" from ") + clientIP + (" now active"),"New Agent")
             output = "[+] Agent %s now active:\n" % (sessionID)
 
             # save the initial sysinfo information in the agent log
